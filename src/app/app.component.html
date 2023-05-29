@@ -1,0 +1,16 @@
+<p>Table is just a mapping of objects to table rows with <code>ngFor</code></p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">TAGS</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let tag of tags">
+			<td>{{ tag.id }}</td>
+			<td>{{ tag.tag }}</td>
+		</tr>
+	</tbody>
+</table>

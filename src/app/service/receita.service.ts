@@ -11,22 +11,30 @@ import { ReceitaStatus } from '../model/receita-status';
 })
 export class ReceitaService {
 
+  url: string = environment.ApiUrl + '/receitas/';
+
   constructor(private httpClient: HttpClient) { }
 
   loadFeed() {
-    return this.httpClient.get<ReceitaFeed[]>(environment.ApiUrl + '/receitas');
+    r
+
+    eturn this.httpClient.get<ReceitaFeed[]>(this.url);
   }
 
-  loadModal(id:BigInteger){
-    return this.httpClient.get<ReceitaModal[]>(environment.ApiUrl + `/receitas/${id}`);
+  loadModal(id: BigInteger) {
+    return this.httpClient.get<ReceitaModal[]>(`${this.url}${id}`);
   }
 
-  incluir(receita:ReceitaRequest,thumb:String){
-    return this.httpClient.post<ReceitaRequest[]>
+  incluir(receita: ReceitaRequest, thumb: File) {
+    const formData = new FormData();
+    formData.append('titulo', receita.titulo);
+    formData.append('tags', JSON.stringify(receita.tags));
+    formData.append('thumb', thumb);
+    return this.httpClient.post<ReceitaRequest[]>(this.url, formData);
   }
 
-  atualizaStatus(status:ReceitaStatus, id:BigInteger){
-    return this.httpClient.patch<ReceitaStatus>(environment.ApiUrl + `/receitas/${id}`,status);
+  atualizaStatus(status: ReceitaStatus, id: BigInteger) {
+    return this.httpClient.patch<ReceitaStatus>(environment.ApiUrl + `/receitas/${id}`, status);
   }
 
 
