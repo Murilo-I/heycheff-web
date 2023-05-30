@@ -16,6 +16,7 @@
     flex-direction: row;
     height: 55px;
     padding: auto;
+    z-index: 999;
 }
 
 #search {
@@ -35,4 +36,8 @@ input {
 .nav-logo img {
     margin-left: 10px;
     height: 40px;
+}
+
+.thumb {
+    position: relative;
 }

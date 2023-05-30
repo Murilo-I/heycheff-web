@@ -2,3 +2,9 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+@import 'primeicons/primeicons.css';
+@import 'primeng/resources/themes/saga-orange/theme.css';
+
+.p-hidden-accessible {
+    display: none;
+}

@@ -1,18 +1,21 @@
 <div class="navbar">
 	<div class="nav-logo">
-		<img src="../assets/hey_cheff.png" alt="Logo HeyCheff">
+		<img src="../assets/hey_cheff_black.png" alt="Logo HeyCheff">
 	</div>
 	<div class="nav-search">
 		<input type="text" id="search" placeholder="Pesquise Aqui...">
 	</div>
-	<modal></modal>
+	<modal [title]="'Cadastrar Receita'" [ehCadastro]="true"></modal>
 </div>
 
 <div class="mt-8 flex flex-wrap justify-content-evenly">
-	<div *ngFor="let receita of feed" class="card flex align-items-center">
-		<p-card [style]="{ width: '400px' }">
+	<div *ngFor="let receita of feed">
+		<p-card [style]="{ width: '400px' }" class="card mb-5">
 			<ng-template pTemplate="header">
-				<img alt="Receita Card" src="{{receita.thumb}}" />
+				<div class="thumb">
+					<img class="card-img" alt="Receita Card" src="{{receita.thumb}}" />
+					<modal [title]="'Aprender Receita'"></modal>
+				</div>
 			</ng-template>
 			<p class="card-title">{{receita.titulo}}</p>
 		</p-card>

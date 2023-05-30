@@ -1,8 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { Tag } from "../model/tag";
 import { environment } from "src/environments/environment";
 import { Injectable } from "@angular/core";
-import { Step } from "../model/step";
+import { StepRequest } from "../model/step-request";
 
 @Injectable({
     providedIn: 'root'
@@ -10,10 +9,10 @@ import { Step } from "../model/step";
 export class StepService {
     constructor(private httpClient: HttpClient) { }
 
-    incluir(step: Step, video: File, receitaId: BigInteger) {
+    incluir(step: StepRequest, video: File, receitaId: BigInteger) {
         const formData = new FormData();
         formData.append('step', step.step.toString());
-        formData.append('produto', JSON.stringify(step.produto));
+        formData.append('produto', JSON.stringify(step.produtos));
         formData.append('modoPreparo', step.modoPreparo);
         formData.append('video', video);
 

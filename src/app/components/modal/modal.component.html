@@ -1,0 +1,16 @@
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title">{{title}}</h4>
+		<button type="button" class="btn-close shadow-none" aria-label="Close"
+			(click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<form *ngIf="ehCadastro"></form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
+	</div>
+</ng-template>
+
+<button *ngIf="ehCadastro" class="btn btn-outline-danger me-2" (click)="openXl(content)">Cadastrar Receita</button>
+<fa-icon *ngIf="!ehCadastro" [icon]="faPlay" animation="beat" class="icon-align" (click)="openXl(content)"></fa-icon>

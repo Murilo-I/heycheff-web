@@ -1,8 +1,8 @@
 import { Produto } from "./produto";
 
-export interface Step {
+export interface StepResponse {
   path: string;
   step: BigInteger;
-  produto: Produto;
+  produto: Produto[];
   modoPreparo: string;
 }

@@ -1,6 +1,5 @@
 import { Tag } from "./tag";
 
-export interface ReceitaRequest {
-  titulo: string;
-  tags: Tag;
+export class ReceitaRequest {
+  constructor(public titulo: string, public tags: Tag[]) { }
 }
