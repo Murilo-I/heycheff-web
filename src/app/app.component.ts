@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TagService } from './service/tag.service';
-import { Tag } from './model/tag';
+import { ReceitaService } from './service/receita.service';
+import { ReceitaFeed } from './model/receita-feed';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +10,15 @@ import { Tag } from './model/tag';
 })
 export class AppComponent implements OnInit {
 
-  tags: Tag[] = [];
-  
-  constructor(private tagService: TagService) { }
+  feed: ReceitaFeed[] = [];
 
+  constructor(private receitaService: ReceitaService) { }
 
   ngOnInit(): void {
-    this.tagService.listAll().subscribe(tags => this.tags = tags);
+    this.receitaService.loadFeed().subscribe(receitas => {
+      receitas.forEach(r => r.thumb = environment.BaseUrl + r.thumb);
+      this.feed = receitas;
+    });
   }
 
 }

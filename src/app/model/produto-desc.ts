@@ -1,3 +1,3 @@
-export interface ProdutoDesc{
-  produtoDesc:string;
+export interface ProdutoDesc {
+  produtoDesc: string;
 }

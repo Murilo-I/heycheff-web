@@ -1,3 +1,3 @@
-export interface ReceitaStatus{
-  status:Boolean;
+export interface ReceitaStatus {
+  status: Boolean;
 }

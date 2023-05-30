@@ -1,0 +1,38 @@
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Comfortaa';
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #FFD186;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: 55px;
+    padding: auto;
+}
+
+#search {
+    font-family: 'Comfortaa';
+    font-weight: 400;
+    font-size: 16px;
+    border-radius: 16px;
+    width: 240px;
+    padding: 5px 10px;
+    border: none;
+}
+
+input {
+    outline: none;
+}
+
+.nav-logo img {
+    margin-left: 10px;
+    height: 40px;
+}

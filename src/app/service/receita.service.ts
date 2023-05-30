@@ -11,18 +11,16 @@ import { ReceitaStatus } from '../model/receita-status';
 })
 export class ReceitaService {
 
-  url: string = environment.ApiUrl + '/receitas/';
+  url: string = environment.ApiUrl + '/receitas';
 
   constructor(private httpClient: HttpClient) { }
 
   loadFeed() {
-    r
-
-    eturn this.httpClient.get<ReceitaFeed[]>(this.url);
+    return this.httpClient.get<ReceitaFeed[]>(this.url);
   }
 
   loadModal(id: BigInteger) {
-    return this.httpClient.get<ReceitaModal[]>(`${this.url}${id}`);
+    return this.httpClient.get<ReceitaModal[]>(`${this.url}/${id}`);
   }
 
   incluir(receita: ReceitaRequest, thumb: File) {
@@ -34,7 +32,7 @@ export class ReceitaService {
   }
 
   atualizaStatus(status: ReceitaStatus, id: BigInteger) {
-    return this.httpClient.patch<ReceitaStatus>(environment.ApiUrl + `/receitas/${id}`, status);
+    return this.httpClient.patch<ReceitaStatus>(`${this.url}/${id}`, status);
   }
 
 

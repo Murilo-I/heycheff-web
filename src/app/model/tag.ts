@@ -1,4 +1,4 @@
-export interface Tag{
-  id:BigInteger;
-  tag:String;
+export interface Tag {
+  id: BigInteger;
+  tag: String;
 }

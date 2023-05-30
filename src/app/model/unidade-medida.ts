@@ -1,3 +1,3 @@
-export interface UnidadeMedida{
-  descricao:string;
+export interface UnidadeMedida {
+  descricao: string;
 }

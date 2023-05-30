@@ -1,6 +1,6 @@
-export interface Produto{
-  desc:string;
-  unidMedida:String;
-  medida:number;
+export interface Produto {
+  desc: string;
+  unidMedida: String;
+  medida: number;
 
 }

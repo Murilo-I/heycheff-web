@@ -1,5 +1,5 @@
 export interface ReceitaFeed {
-    id:BigInteger;
-    thumb:string;
-    titulo:string;
+    id: BigInteger;
+    thumb: string;
+    titulo: string;
 }
