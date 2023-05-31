@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
-import { Tag } from "../model/tag";
 import { environment } from "src/environments/environment";
 import { Injectable } from "@angular/core";
+import { UnidadeMedida } from "../model/unidade-medida";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +9,7 @@ import { Injectable } from "@angular/core";
 export class UnidadeMedidaService {
     constructor(private httpClient: HttpClient) { }
 
-    list(produtoId: string) {
-        return this.httpClient.get<Tag>(environment.ApiUrl + `/produtos/${produtoId}/medidas`);
+    list(produtoId: number) {
+        return this.httpClient.get<UnidadeMedida[]>(environment.ApiUrl + `/produtos/${produtoId}/medidas`);
     }
 }

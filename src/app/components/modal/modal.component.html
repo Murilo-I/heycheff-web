@@ -6,6 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form-receita *ngIf="ehCadastro"></form-receita>
+		<form-step *ngIf="stepFull"></form-step>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>

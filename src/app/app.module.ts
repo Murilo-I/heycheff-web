@@ -21,6 +21,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { OrderListModule } from 'primeng/orderlist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { ButtonModule } from 'primeng/button';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,10 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     OrderListModule,
     DragDropModule,
-    ButtonModule
+    ButtonModule,
+    InputTextareaModule,
+    DropdownModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,24 @@
+<div class="flex justify-content-center">
+    <div style="display: inline; justify-content: center;">
+        <p-toast></p-toast>
+        <p-fileUpload mode="basic" chooseLabel="Selecione o Vídeo" name="video" [maxFileSize]="10000000"
+            url="https://www.primefaces.org/cdn/api/upload.php" accept="video/*"></p-fileUpload>
+
+        <div formGroup="stepForm" class="mt-3 mb-2 flex flex-wrap justify-content-evenly produto-list">
+            <div formArrayName="ingredientes" *ngFor="let prod of ingredientes.controls; index as i">
+                <div formGroupName="i">
+                    <p-dropdown formControlName="desc" [options]="produtos" placeholder="Aponte o ingrediente"
+                        [editable]="true" optionLabel="produtoDesc" class="mt-2 mb-2"></p-dropdown>
+                    <p-dropdown formControlName="unidMedida" class="m-2" [options]="medidas"
+                        optionLabel="descricao"></p-dropdown>
+                    <p-inputNumber formControlName="medida" [placeholder]="'Medida'" mode="decimal"
+                        [useGrouping]="false" class="mt-2 mb-2"></p-inputNumber>
+                </div>
+            </div>
+            <p-button (onClick)="addProduto()" class="add-produto mb-2" styleClass="p-button-raised p-button-text"
+                icon="pi pi-plus"></p-button>
+        </div>
+
+        <textarea rows="5" style="width: 100%" pInputTextarea [autoResize]="true"></textarea>
+    </div>
+</div>

@@ -10,7 +10,7 @@ export class ProdutoService {
   constructor(private httpClient: HttpClient) { }
 
   listAll() {
-    return this.httpClient.get<ProdutoDesc>(environment.ApiUrl + '/produtos')
+    return this.httpClient.get<ProdutoDesc[]>(environment.ApiUrl + '/produtos')
   }
 
 }
