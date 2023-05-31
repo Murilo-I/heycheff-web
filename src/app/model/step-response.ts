@@ -2,7 +2,7 @@ import { Produto } from "./produto";
 
 export interface StepResponse {
   path: string;
-  step: BigInteger;
+  step: number;
   produto: Produto[];
   modoPreparo: string;
 }

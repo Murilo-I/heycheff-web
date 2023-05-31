@@ -1,4 +1,3 @@
-export interface Tag {
-  id: BigInteger;
-  tag: String;
+export class Tag {
+  constructor(public id: number, public tag: string) { }
 }

@@ -1,6 +1,6 @@
 import { Produto } from "./produto";
 
 export class StepRequest {
-  constructor(public step: BigInteger, public produtos: Produto[],
+  constructor(public step: number, public produtos: Produto[],
     public modoPreparo: string) { }
 }

@@ -14,7 +14,7 @@ import { TagService } from 'src/app/service/tag.service';
 })
 export class FormComponent implements OnInit {
     uploadedFiles: File[] = [];
-    selectedTags: Tag[] = [];
+    selectedTags: string[] = [];
     titulo: string = '';
 
     tags: Tag[] = [];
@@ -31,9 +31,8 @@ export class FormComponent implements OnInit {
             this.uploadedFiles.push(file);
         }
 
-        const receita = new ReceitaRequest(this.titulo, this.selectedTags);
-        console.log(receita);
-        console.log(this.uploadedFiles);
+        const tagsRequest = this.tags.filter(value => this.selectedTags.includes(value.tag));
+        const receita = new ReceitaRequest(this.titulo, tagsRequest);
 
         this.receitaService.incluir(receita, this.uploadedFiles[0]).subscribe((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
