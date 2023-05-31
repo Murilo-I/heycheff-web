@@ -5,7 +5,7 @@
 			(click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-		<form *ngIf="ehCadastro"></form>
+		<form-receita *ngIf="ehCadastro"></form-receita>
 	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-light" (click)="modal.close('Close click')">Fechar</button>
@@ -13,4 +13,6 @@
 </ng-template>
 
 <button *ngIf="ehCadastro" class="btn btn-outline-danger me-2" (click)="openXl(content)">Cadastrar Receita</button>
-<fa-icon *ngIf="!ehCadastro" [icon]="faPlay" animation="beat" class="icon-align" (click)="openXl(content)"></fa-icon>
+<fa-icon *ngIf="learnReceita" [icon]="faPlay" animation="beat" class="icon-align" (click)="openXl(content)"></fa-icon>
+<p-button *ngIf="stepFull" label="Adicionar Step" styleClass="p-button-raised p-button-text"
+	(click)="openFullscreen(content)"></p-button>

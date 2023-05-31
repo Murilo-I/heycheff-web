@@ -8,7 +8,9 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons';
 	styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
+	@Input() learnReceita: boolean = false;
 	@Input() ehCadastro: boolean = false;
+	@Input() stepFull: boolean = false;
 	@Input() title: string = '';
 
 	faPlay = faPlay;

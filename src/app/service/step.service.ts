@@ -9,12 +9,12 @@ import { StepRequest } from "../model/step-request";
 export class StepService {
     constructor(private httpClient: HttpClient) { }
 
-    incluir(step: StepRequest, video: File, receitaId: BigInteger) {
+    incluir(step: StepRequest, receitaId: BigInteger) {
         const formData = new FormData();
         formData.append('step', step.step.toString());
         formData.append('produto', JSON.stringify(step.produtos));
         formData.append('modoPreparo', step.modoPreparo);
-        formData.append('video', video);
+        formData.append('video', step.video);
 
         return this.httpClient.post(environment.ApiUrl + `/receitas/${receitaId}/steps`, formData);
     }

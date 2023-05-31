@@ -1,3 +1,3 @@
 export class ReceitaStatus {
-  constructor(private status: Boolean) { }
+  constructor(private status: boolean) { }
 }

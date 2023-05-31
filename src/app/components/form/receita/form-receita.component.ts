@@ -2,19 +2,21 @@ import { HttpEvent, HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ReceitaRequest } from 'src/app/model/receita-request';
+import { StepRequest } from 'src/app/model/step-request';
 import { Tag } from 'src/app/model/tag';
 import { ReceitaService } from 'src/app/service/receita.service';
 import { TagService } from 'src/app/service/tag.service';
 
 @Component({
-    selector: 'form',
-    templateUrl: './form.component.html',
-    styleUrls: ['./form.component.scss'],
+    selector: 'form-receita',
+    templateUrl: './form-receita.component.html',
+    styleUrls: ['./form-receita.component.scss'],
     providers: [MessageService]
 })
-export class FormComponent implements OnInit {
-    uploadedFiles: File[] = [];
+export class FormReceitaComponent implements OnInit {
+    thumb: File[] = [];
     selectedTags: string[] = [];
+    steps: StepRequest[] = [];
     titulo: string = '';
 
     tags: Tag[] = [];
@@ -26,15 +28,15 @@ export class FormComponent implements OnInit {
         this.tagService.listAll().subscribe(tags => this.tags = tags);
     }
 
-    onUpload(event: any) {
+    uploadReceita(event: any) {
         for (let file of event.files) {
-            this.uploadedFiles.push(file);
+            this.thumb.push(file);
         }
 
         const tagsRequest = this.tags.filter(value => this.selectedTags.includes(value.tag));
         const receita = new ReceitaRequest(this.titulo, tagsRequest);
 
-        this.receitaService.incluir(receita, this.uploadedFiles[0]).subscribe((event: HttpEvent<any>) => {
+        this.receitaService.incluir(receita, this.thumb[0]).subscribe((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
                 this.messageService.add({ severity: 'success', summary: 'Receita salva', detail: '' });
             }

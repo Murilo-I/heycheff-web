@@ -1,0 +1,42 @@
+<div class="card flex justify-content-center">
+    <p-toast></p-toast>
+    <p-fileUpload name="thumb" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="uploadReceita($event)"
+        accept="image/*" [maxFileSize]="1000000" [chooseLabel]="' Selecione'" [cancelLabel]="'Cancelar'"
+        [uploadLabel]="'Salvar Receita'">
+        <ng-template pTemplate="toolbar">
+            <p class="mt-3 text-center">Escolha uma ou mais categorias</p>
+            <div class="mt-2 flex flex-wrap justify-content-center gap-3">
+                <div *ngFor="let tag of tags" class="flex align-items-center gap-1">
+                    <p-checkbox name="selectedTags" value="{{tag.tag}}" [(ngModel)]="selectedTags"
+                        inputId="{{tag.id}}"></p-checkbox>
+                    <label for="{{tag.id}}">{{tag.tag}}</label>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <ul *ngIf="thumb.length">
+                <li *ngFor="let file of thumb">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+            <div class="flex flex-column gap-2">
+                <label htmlFor="titulo">Título da Receita</label>
+                <input pInputText id="titulo" [(ngModel)]="titulo" />
+            </div>
+            <div class="mt-4 card flex justify-content-center">
+                <p-orderList [value]="steps" [listStyle]="{ 'min-height': '5rem' }" header="Steps" [dragdrop]="true">
+                    <ng-template let-step pTemplate="item">
+                        <div class="flex align-items-center p-2 w-full flex-wrap">
+                            <div class="flex-1">
+                                <h5 class="mb-2">{{ step.video.name }}</h5>
+                                <span class="vertical-align-middle line-height-1">{{ step.video.size }}</span>
+                            </div>
+                            <div class="flex flex-column align-items-end">
+                                <h6 class="mb-2">{{ step.modoPreparo }}</h6>
+                            </div>
+                        </div>
+                    </ng-template>
+                </p-orderList>
+                <modal class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"></modal>
+            </div>
+        </ng-template>
+    </p-fileUpload>
+</div>

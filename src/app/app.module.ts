@@ -7,7 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormComponent } from './components/form/form.component';
+import { FormReceitaComponent } from './components/form/receita/form-receita.component';
+import { FormStepComponent } from './components/form/step/form-step.component';
 import { ModalComponent } from './components/modal/modal.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,12 +18,16 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { CheckboxModule } from 'primeng/checkbox';
 import { InputTextModule } from 'primeng/inputtext';
+import { OrderListModule } from 'primeng/orderlist';
+import { DragDropModule } from 'primeng/dragdrop';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [
     AppComponent,
     ModalComponent,
-    FormComponent
+    FormReceitaComponent,
+    FormStepComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,10 @@ import { InputTextModule } from 'primeng/inputtext';
     FileUploadModule,
     CheckboxModule,
     ToastModule,
-    InputTextModule
+    InputTextModule,
+    OrderListModule,
+    DragDropModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
