@@ -35,7 +35,7 @@
                         </div>
                     </ng-template>
                 </p-orderList>
-                <modal class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"></modal>
+                <modal (stepSalvo)="addStep($event)" class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"></modal>
             </div>
         </ng-template>
     </p-fileUpload>

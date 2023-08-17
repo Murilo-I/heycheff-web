@@ -1,9 +1,10 @@
 import { HttpEvent, HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ReceitaRequest } from 'src/app/model/receita-request';
 import { StepRequest } from 'src/app/model/step-request';
 import { Tag } from 'src/app/model/tag';
+import { UploadEvent } from 'src/app/model/upload-event';
 import { ReceitaService } from 'src/app/service/receita.service';
 import { TagService } from 'src/app/service/tag.service';
 
@@ -28,7 +29,12 @@ export class FormReceitaComponent implements OnInit {
         this.tagService.listAll().subscribe(tags => this.tags = tags);
     }
 
-    uploadReceita(event: any) {
+    addStep(step: StepRequest) {
+        this.steps.push(step);
+        console.log("step salvo");
+    }
+
+    uploadReceita(event: UploadEvent) {
         for (let file of event.files) {
             this.thumb.push(file);
         }

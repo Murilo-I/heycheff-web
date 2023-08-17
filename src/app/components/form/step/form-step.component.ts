@@ -1,8 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { Produto } from "src/app/model/produto";
 import { ProdutoDesc } from "src/app/model/produto-desc";
+import { StepRequest } from "src/app/model/step-request";
 import { UnidadeMedida } from "src/app/model/unidade-medida";
+import { UploadEvent } from "src/app/model/upload-event";
 import { ProdutoService } from "src/app/service/produto.service";
 import { UnidadeMedidaService } from "src/app/service/unidade-medida.service";
 
@@ -13,8 +15,13 @@ import { UnidadeMedidaService } from "src/app/service/unidade-medida.service";
 })
 export class FormStepComponent implements OnInit {
 
+    @Output() stepEvent = new EventEmitter<StepRequest>();
+
     medidas: UnidadeMedida[] = [];
     produtos: ProdutoDesc[] = [];
+
+    video!: File;
+    modoPreparo: string = '';
     produtosData: Produto[] = [{ desc: '', unidMedida: '', medida: 0 }];
     formBuilder: FormBuilder = new FormBuilder();
 
@@ -40,5 +47,13 @@ export class FormStepComponent implements OnInit {
             unidMedida: null,
             medida: null
         }));
+    }
+
+    salvarStep() {
+        this.stepEvent.emit(new StepRequest(1, this.produtosData, this.modoPreparo, this.video));
+    }
+
+    selectVideo(event: UploadEvent) {
+        this.video = event.files[0];
     }
 }

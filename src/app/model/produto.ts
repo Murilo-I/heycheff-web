@@ -1,5 +1,5 @@
 export interface Produto {
   desc: string;
-  unidMedida: String;
+  unidMedida: string;
   medida: number;
 }
