@@ -15,10 +15,12 @@ import { TagService } from 'src/app/service/tag.service';
     providers: [MessageService]
 })
 export class FormReceitaComponent implements OnInit {
-    thumb: File[] = [];
+    thumb!: File;
     selectedTags: string[] = [];
     steps: StepRequest[] = [];
     titulo: string = '';
+    stepEnabled: boolean = false;
+    receitaId: number = 0;
 
     tags: Tag[] = [];
 
@@ -32,19 +34,22 @@ export class FormReceitaComponent implements OnInit {
     addStep(step: StepRequest) {
         this.steps.push(step);
         console.log("step salvo");
+        console.log(step);
     }
 
-    uploadReceita(event: UploadEvent) {
-        for (let file of event.files) {
-            this.thumb.push(file);
-        }
+    selectThumb(event: UploadEvent) {
+        this.thumb = event.files[0];
+    }
 
+    uploadReceita() {
         const tagsRequest = this.tags.filter(value => this.selectedTags.includes(value.tag));
         const receita = new ReceitaRequest(this.titulo, tagsRequest);
 
-        this.receitaService.incluir(receita, this.thumb[0]).subscribe((event: HttpEvent<any>) => {
+        this.receitaService.incluir(receita, this.thumb).subscribe((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
                 this.messageService.add({ severity: 'success', summary: 'Receita salva', detail: '' });
+                this.stepEnabled = true;
+                this.receitaId =  event.body.id;
             }
         },
             err => this.messageService.add({ severity: 'error', summary: 'Erro ao salvar receita', detail: err.toString() }));

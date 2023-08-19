@@ -1,27 +1,29 @@
 <div class="card flex justify-content-center">
     <p-toast></p-toast>
-    <p-fileUpload name="thumb" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="uploadReceita($event)"
-        accept="image/*" [maxFileSize]="1000000" [chooseLabel]="' Selecione'" [cancelLabel]="'Cancelar'"
-        [uploadLabel]="'Salvar Receita'">
-        <ng-template pTemplate="toolbar">
+    <p-fileUpload name="thumb" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="selectThumb($event)"
+        accept="image/*" [maxFileSize]="1000000" [chooseLabel]="' Adicionar'" [chooseIcon]="'pi pi-image'"
+        [auto]="true">
+        <ng-template pTemplate="content">
+            <ul *ngIf="thumb">
+                <li>{{ thumb.name }} - {{ thumb.size }} bytes</li>
+            </ul>
             <p class="mt-3 text-center">Escolha uma ou mais categorias</p>
-            <div class="mt-2 flex flex-wrap justify-content-center gap-3">
+            <div class="mb-4 flex flex-wrap justify-content-center gap-3">
                 <div *ngFor="let tag of tags" class="flex align-items-center gap-1">
                     <p-checkbox name="selectedTags" value="{{tag.tag}}" [(ngModel)]="selectedTags"
                         inputId="{{tag.id}}"></p-checkbox>
                     <label for="{{tag.id}}">{{tag.tag}}</label>
                 </div>
             </div>
-        </ng-template>
-        <ng-template pTemplate="content">
-            <ul *ngIf="thumb.length">
-                <li *ngFor="let file of thumb">{{ file.name }} - {{ file.size }} bytes</li>
-            </ul>
-            <div class="flex flex-column gap-2">
+            <div class="flex flex-column gap-2 mb-3">
                 <label htmlFor="titulo">Título da Receita</label>
                 <input pInputText id="titulo" [(ngModel)]="titulo" />
             </div>
-            <div class="mt-4 card flex justify-content-center">
+
+            <p-button [disabled]="stepEnabled" label="Salvar Receita" icon="pi pi-upload"
+                (onClick)="uploadReceita()"></p-button>
+
+            <div *ngIf="stepEnabled" class="mt-4 card flex justify-content-center">
                 <p-orderList [value]="steps" [listStyle]="{ 'min-height': '5rem' }" header="Steps" [dragdrop]="true">
                     <ng-template let-step pTemplate="item">
                         <div class="flex align-items-center p-2 w-full flex-wrap">
@@ -35,7 +37,8 @@
                         </div>
                     </ng-template>
                 </p-orderList>
-                <modal (stepSalvo)="addStep($event)" class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"></modal>
+                <modal (stepSalvo)="addStep($event)" class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"
+                    [receitaId]="receitaId"></modal>
             </div>
         </ng-template>
     </p-fileUpload>

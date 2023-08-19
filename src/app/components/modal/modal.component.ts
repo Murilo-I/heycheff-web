@@ -14,6 +14,7 @@ export class ModalComponent {
 	@Input() ehCadastro: boolean = false;
 	@Input() stepFull: boolean = false;
 	@Input() title: string = '';
+	@Input() receitaId: number = 0;
 
 	faPlay = faPlay;
 
@@ -29,7 +30,5 @@ export class ModalComponent {
 
 	pushStep(step: StepRequest) {
 		this.stepSalvo.emit(step);
-		this.modalService.activeInstances
-			.subscribe(modals => modals.at(1)?.close(step));
 	}
 }

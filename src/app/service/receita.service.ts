@@ -1,11 +1,11 @@
 import { ReceitaModal } from './../model/receita-modal';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ReceitaFeed } from '../model/receita-feed';
 import { ReceitaRequest } from '../model/receita-request';
 import { ReceitaStatus } from '../model/receita-status';
-import { catchError, throwError } from 'rxjs';
+import { catchError } from 'rxjs';
 import { handleError } from './error.handler';
 
 @Injectable({

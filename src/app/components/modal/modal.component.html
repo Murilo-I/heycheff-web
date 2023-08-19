@@ -6,7 +6,7 @@
 	</div>
 	<div class="modal-body">
 		<form-receita *ngIf="ehCadastro"></form-receita>
-		<form-step (stepEvent)="pushStep($event)" *ngIf="stepFull"></form-step>
+		<form-step (stepEvent)="pushStep($event)" [receitaId]="receitaId" *ngIf="stepFull"></form-step>
 		<video-receita *ngIf="learnReceita"></video-receita>
 	</div>
 	<div class="modal-footer">
