@@ -10,7 +10,7 @@ import { ProdutoService } from "src/app/service/produto.service";
 import { StepService } from "src/app/service/step.service";
 import { UnidadeMedidaService } from "src/app/service/unidade-medida.service";
 import { HttpEvent, HttpResponse } from "@angular/common/http";
-import { StepResponse } from "src/app/model/step-response";
+import { NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'form-step',
@@ -23,11 +23,13 @@ export class FormStepComponent implements OnInit {
     @Output() stepEvent = new EventEmitter<StepRequest>();
     @Input() receitaId: number = 0;
     @Input() stepNumber: number = 0;
+    @Input() modal!: NgbModalRef;
 
-    medidas: UnidadeMedida[] = [];
-    produtos: ProdutoDesc[] = [];
+    medidas: string[] = [];
+    produtos: string[] = [];
 
     video!: File;
+    chooseLabel: string = 'Adicionar Vídeo';
     modoPreparo: string = '';
     produtosData: Produto[] = [{ desc: '', unidMedida: '', medida: 0 }];
     formBuilder: FormBuilder = new FormBuilder();
@@ -36,8 +38,8 @@ export class FormStepComponent implements OnInit {
         private produtoService: ProdutoService, private stepService: StepService) { }
 
     ngOnInit(): void {
-        this.medidaService.list(0).subscribe(medidas => this.medidas = medidas);
-        this.produtoService.listAll().subscribe(produtos => this.produtos = produtos);
+        this.medidaService.list(0).subscribe(medidas => medidas.map(unidadeMedida => this.medidas.push(unidadeMedida.descricao)));
+        this.produtoService.listAll().subscribe(produtos => produtos.map(prod => this.produtos.push(prod.produtoDesc)));
     }
 
     formStep: FormGroup = this.formBuilder.group({
@@ -50,14 +52,15 @@ export class FormStepComponent implements OnInit {
 
     addProduto(): void {
         this.ingredientes.push(this.formBuilder.group({
-            desc: null,
-            unidMedida: null,
-            medida: null
+            desc: '',
+            unidMedida: 'grama',
+            medida: 0
         }));
     }
 
     salvarStep() {
-        var step = new StepRequest(this.stepNumber, this.produtosData, this.modoPreparo, this.video);
+        var produtos = this.ingredientes.getRawValue() as Produto[];
+        var step = new StepRequest(this.stepNumber, produtos, this.modoPreparo, this.video);
         this.stepService.incluir(step, this.receitaId).subscribe((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
                 this.messageService.add({ severity: 'success', summary: 'Step salvo', detail: '' })
@@ -66,10 +69,12 @@ export class FormStepComponent implements OnInit {
             err => this.messageService.add({ severity: 'error', summary: 'Erro ao salvar step', detail: err.toString() }));
 
         this.stepEvent.emit(step);
+        this.modal.close("Close step");
     }
 
     selectVideo(event: UploadEvent) {
         this.video = event.files[0];
+        this.chooseLabel = this.video.name;
         this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Video selecionado' });
     }
 }

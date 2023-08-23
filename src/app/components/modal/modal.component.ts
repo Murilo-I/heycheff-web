@@ -15,6 +15,7 @@ export class ModalComponent {
 	@Input() stepFull: boolean = false;
 	@Input() title: string = '';
 	@Input() receitaId: number = 0;
+	@Input() stepNumber: number = 0;
 
 	faPlay = faPlay;
 

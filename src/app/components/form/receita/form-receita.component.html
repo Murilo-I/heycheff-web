@@ -20,7 +20,7 @@
                 <input pInputText id="titulo" [(ngModel)]="titulo" />
             </div>
 
-            <p-button [disabled]="stepEnabled" label="Salvar Receita" icon="pi pi-upload"
+            <p-button [disabled]="stepEnabled" label="Salvar Receita" icon="pi pi-save"
                 (onClick)="uploadReceita()"></p-button>
 
             <div *ngIf="stepEnabled" class="mt-4 card flex justify-content-center">
@@ -38,7 +38,7 @@
                     </ng-template>
                 </p-orderList>
                 <modal (stepSalvo)="addStep($event)" class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"
-                    [receitaId]="receitaId"></modal>
+                    [receitaId]="receitaId" [stepNumber]="steps.length + 1"></modal>
             </div>
         </ng-template>
     </p-fileUpload>
