@@ -1,6 +1,24 @@
-.text-center {
+.title-category {
     font-size: 18px;
     font-weight: bold;
     text-align: center;
     font-family: 'Comfortaa';
+}
+
+.categories-select {
+    display: none;
+}
+
+@media (max-width:1200px) {
+    .title-category {
+        text-align: left;
+    }
+
+    .categories {
+        display: none;
+    }
+
+    .categories-select {
+        display: inline;
+    }
 }

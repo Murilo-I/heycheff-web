@@ -53,7 +53,7 @@ export class FormStepComponent implements OnInit {
     addProduto(): void {
         this.ingredientes.push(this.formBuilder.group({
             desc: '',
-            unidMedida: 'grama',
+            unidMedida: '',
             medida: 0
         }));
     }
@@ -72,8 +72,8 @@ export class FormStepComponent implements OnInit {
         this.modal.close("Close step");
     }
 
-    selectVideo(event: UploadEvent) {
-        this.video = event.files[0];
+    selectVideo(event: any) {
+        this.video = event.target.files[0];
         this.chooseLabel = this.video.name;
         this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Video selecionado' });
     }

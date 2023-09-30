@@ -23,8 +23,7 @@ import { OrderListModule } from 'primeng/orderlist';
 import { DragDropModule } from 'primeng/dragdrop';
 import { ButtonModule } from 'primeng/button';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { DropdownModule } from 'primeng/dropdown';
-import { InputNumberModule } from 'primeng/inputnumber';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -53,8 +52,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     DragDropModule,
     ButtonModule,
     InputTextareaModule,
-    DropdownModule,
-    InputNumberModule
+    MultiSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

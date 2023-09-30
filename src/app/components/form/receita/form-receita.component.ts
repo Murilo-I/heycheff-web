@@ -21,6 +21,7 @@ export class FormReceitaComponent implements OnInit {
     titulo: string = '';
     stepEnabled: boolean = false;
     receitaId: number = 0;
+    url: any = '';
 
     tags: Tag[] = [];
 
@@ -29,12 +30,6 @@ export class FormReceitaComponent implements OnInit {
 
     ngOnInit(): void {
         this.tagService.listAll().subscribe(tags => this.tags = tags);
-    }
-
-    addStep(step: StepRequest) {
-        this.steps.push(step);
-        console.log("step salvo");
-        console.log(step);
     }
 
     selectThumb(event: UploadEvent) {
@@ -49,9 +44,44 @@ export class FormReceitaComponent implements OnInit {
             if (event instanceof HttpResponse) {
                 this.messageService.add({ severity: 'success', summary: 'Receita salva', detail: '' });
                 this.stepEnabled = true;
-                this.receitaId =  event.body.id;
+                this.receitaId = event.body.id;
             }
         },
             err => this.messageService.add({ severity: 'error', summary: 'Erro ao salvar receita', detail: err.toString() }));
+    }
+
+    addStep(step: StepRequest) {
+        this.steps = [...this.steps, step];
+        let reader = new FileReader();
+
+        this.getVideoCover(step.video).then(cover => {
+            if (cover != null) {
+                reader.readAsDataURL(cover);
+                reader.onload = (event) => {
+                    this.url = event.target?.result;
+                }
+            }
+        });
+    }
+
+    getVideoCover(file: File): Promise<Blob | null> {
+        return new Promise((resolve, reject) => {
+            var video = document.createElement('video');
+            video.setAttribute('src', URL.createObjectURL(file));
+            video.load();
+            video.addEventListener('error', exception => {
+                reject("error when loading video file: " + exception);
+            });
+
+            video.addEventListener('loadedmetadata', () => {
+                setTimeout(() => { }, 200);
+
+                video.addEventListener('seeked', () => {
+                    var canvas = document.createElement('canvas');
+                    canvas.getContext('2d')?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+                    canvas.toBlob(blob => { resolve(blob) }, 'image/jpeg', .75);
+                });
+            });
+        });
     }
 }

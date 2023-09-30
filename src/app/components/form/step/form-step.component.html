@@ -1,18 +1,26 @@
 <div class="flex justify-content-center">
     <div style="display: inline; justify-content: center;">
         <p-toast></p-toast>
-        <p-fileUpload mode="basic" chooseLabel="{{chooseLabel}}" name="video" [chooseIcon]="'pi pi-video'"
-            [maxFileSize]="10000000" url="https://www.primefaces.org/cdn/api/upload.php" accept="video/*"
-            (onUpload)="selectVideo($event)" [auto]="true"></p-fileUpload>
-
-        <div [formGroup]="formStep" class="mt-3 mb-2 flex flex-wrap justify-content-evenly produto-list">
-            <div formArrayName="ingredientes" *ngFor="let prod of ingredientes.controls; index as i">
-                <div [formGroupName]="i">
-                    <p-dropdown formControlName="desc" [options]="produtos" placeholder="Aponte o ingrediente"
-                        [editable]="true" class="mt-2 mb-2"></p-dropdown>
-                    <p-dropdown formControlName="unidMedida" class="m-2" [options]="medidas"></p-dropdown>
-                    <p-inputNumber formControlName="medida" [placeholder]="'Medida'" mode="decimal"
-                        [useGrouping]="false" class="mt-2 mb-2"></p-inputNumber>
+        <div>
+            <label for="video" class="input-file">
+                <i class="pi pi-video"></i>
+                &nbsp;{{chooseLabel}}
+            </label>
+            <input type="file" accept="video/*" name="video" id="video" (change)="selectVideo($event)">
+        </div>
+        <div [formGroup]="formStep" class="mt-2 mb-2 produto-list">
+            <div formArrayName="ingredientes" *ngFor="let control of ingredientes.controls; index as i">
+                <div [formGroupName]="i" class="form-step mb-2">
+                    <input type="text" formControlName="desc" placeholder="Aponte o ingrediente" class="input-step"
+                        list="produtos">
+                    <datalist id="produtos">
+                        <option *ngFor="let prod of produtos">{{ prod }}</option>
+                    </datalist>
+                    <select formControlName="unidMedida" class="input-step">
+                        <option disabled>Unidade medida</option>
+                        <option *ngFor="let uniMed of medidas">{{ uniMed }}</option>
+                    </select>
+                    <input type="number" formControlName="medida" class="input-step" placeholder="Medida">
                 </div>
             </div>
             <p-button (onClick)="addProduto()" class="add-produto mb-2" styleClass="p-button-raised p-button-text"
@@ -22,6 +30,6 @@
         <textarea placeholder="Modo de Preparo..." rows="5" style="width: 100%" pInputTextarea [autoResize]="true"
             [(ngModel)]="modoPreparo" class="mb-2"></textarea>
 
-        <p-button label="Salvar" icon="pi pi-save" (onClick)="salvarStep()"></p-button>
+        <p-button [disabled]="video == null" label="Salvar" icon="pi pi-save" (onClick)="salvarStep()"></p-button>
     </div>
 </div>

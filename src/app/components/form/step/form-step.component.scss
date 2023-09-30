@@ -8,3 +8,67 @@
     right: -3rem;
     bottom: 0;
 }
+
+@media (max-width: 570px) {
+    .add-produto {
+        right: 0;
+    }
+}
+
+.form-step {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-step {
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    padding: .4rem;
+    width: 32%;
+    margin: .5rem 0;
+    border-color: transparent;
+    border-radius: 3px;
+    min-width: 175px;
+}
+
+.input-step:focus-visible {
+    box-shadow: 0 0 0 .2rem #FFE69C;
+}
+
+.input-step:focus-visible,
+.input-step:hover {
+    outline: solid 1px #FFC107;
+}
+
+select,
+datalist {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+}
+
+input[type=file] {
+    display: none;
+}
+
+.input-file {
+    padding: .5rem 1rem;
+    border-radius: 3px;
+    border-color: transparent;
+    background-color: #FFC107;
+    cursor: pointer;
+}
+
+.input-file:hover {
+    background-color: #EAB107;
+}

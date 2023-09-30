@@ -14,7 +14,7 @@ export class StepService {
     incluir(step: StepRequest, receitaId: number) {
         const formData = new FormData();
         formData.append('step', step.step.toString());
-        formData.append('produto', JSON.stringify(step.produtos));
+        formData.append('produtos', JSON.stringify(step.produtos));
         formData.append('modoPreparo', step.modoPreparo);
         formData.append('video', step.video);
 
