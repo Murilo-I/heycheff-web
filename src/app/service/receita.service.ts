@@ -36,8 +36,10 @@ export class ReceitaService {
     }).pipe(catchError(err => handleError(err)));
   }
 
-  atualizaStatus(status: ReceitaStatus, id: BigInteger) {
-    return this.httpClient.patch<ReceitaStatus>(`${this.url}/${id}`, status)
-      .pipe(catchError(err => handleError(err)));
+  atualizaStatus(status: ReceitaStatus, id: number) {
+    return this.httpClient.patch<ReceitaStatus>(`${this.url}/${id}`, status, {
+      observe: 'events',
+      reportProgress: true
+    }).pipe(catchError(err => handleError(err)));
   }
 }

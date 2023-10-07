@@ -4,9 +4,12 @@
         accept="image/*" [maxFileSize]="1000000" [chooseLabel]="' Adicionar'" [chooseIcon]="'pi pi-image'"
         [auto]="true">
         <ng-template pTemplate="content">
-            <ul *ngIf="thumb">
-                <li>{{ thumb.name }}</li>
-            </ul>
+            <div *ngIf="thumb">
+                <ul>
+                    <li>{{ thumb.name }}</li>
+                </ul>
+                <img src="{{ thumbUrl }}" [alt]="thumb.name" height="75px" class="ml-3">
+            </div>
             <p class="mt-3 title-category">Escolha uma ou mais categorias</p>
             <div class="categories">
                 <div class="mb-4 flex flex-wrap justify-content-center gap-3">
@@ -34,10 +37,10 @@
                 <p-orderList [value]="steps" [listStyle]="{ 'min-height': '5rem' }" header="Steps" [dragdrop]="true">
                     <ng-template let-step pTemplate="item">
                         <div class="flex align-items-center p-2 w-full flex-wrap">
-                            <div class="flex-1">
+                            <div class="flex-1 mb-2">
                                 <div class="w-full text-center lg:w-auto lg:text-left mb-2">
-                                    <img src="{{ url }}" [alt]="step.video.name"
-                                        class="mr-3 shadow-3 w-7rem mb-3 lg:w-5rem lg:mb-auto" />
+                                    <img src="{{ videoUrl[step.step - 1] }}" [alt]="step.video.name" height="75px"
+                                        class="shadow-3" />
                                 </div>
                                 <span class="vertical-align-middle line-height-1">{{ step.video.name }}</span>
                             </div>
@@ -49,6 +52,11 @@
                 </p-orderList>
                 <modal (stepSalvo)="addStep($event)" class="m-2" [title]="'Cadastrar Step'" [stepFull]="true"
                     [receitaId]="receitaId" [stepNumber]="steps.length + 1"></modal>
+            </div>
+
+            <div *ngIf="stepEnabled" class="flex mt-4 justify-content-end" style="width: 100%;">
+                <p-button [disabled]="steps.length < 2" label="Finalizar Cadastro" icon="pi pi-save"
+                    (onClick)="finishForm()"></p-button>
             </div>
         </ng-template>
     </p-fileUpload>
