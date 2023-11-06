@@ -2,10 +2,32 @@
 	<div class="nav-logo">
 		<img src="../assets/hey_cheff_black.png" alt="Logo HeyCheff">
 	</div>
-	<div class="nav-search">
-		<input type="text" id="search" placeholder="Pesquise Aqui...">
+	<input type="text" class="nav-search nav-item" placeholder="Pesquise Aqui...">
+	<div class="nav-item">
+		<modal [title]="'Cadastrar Receita'" [ehCadastro]="true"></modal>
 	</div>
-	<modal [title]="'Cadastrar Receita'" [ehCadastro]="true"></modal>
+
+	<ng-template #content let-offcanvas>
+		<div class="offcanvas-header">
+			<h4 class="offcanvas-title">Menu</h4>
+			<button type="button" class="btn-close" aria-label="Close"
+				(click)="offcanvas.dismiss('Cross click')"></button>
+		</div>
+		<div class="offcanvas-body">
+			<div class="search-area">
+				<input type="text" class="nav-search" placeholder="Digite Aqui...">
+				<div class="text-end">
+					<button type="button" class="btn btn-outline-dark" (click)="offcanvas.close('Close click')">
+						<i class="pi pi-search"></i>
+					</button>
+				</div>
+			</div>
+			<modal [title]="'Cadastrar Receita'" [ehCadastro]="true"></modal>
+		</div>
+	</ng-template>
+	<button class="btn btn-outline-danger me-2 btn-menu" (click)="openMenu(content)">
+		<i class="pi pi-search"></i>
+	</button>
 </div>
 
 <div class="mt-8 flex flex-wrap justify-content-evenly">
