@@ -2,10 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { MessageService } from 'primeng/api';
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
 import { Produto } from "src/app/model/produto";
-import { ProdutoDesc } from "src/app/model/produto-desc";
 import { StepRequest } from "src/app/model/step-request";
-import { UnidadeMedida } from "src/app/model/unidade-medida";
-import { UploadEvent } from "src/app/model/upload-event";
 import { ProdutoService } from "src/app/service/produto.service";
 import { StepService } from "src/app/service/step.service";
 import { UnidadeMedidaService } from "src/app/service/unidade-medida.service";
@@ -31,7 +28,7 @@ export class FormStepComponent implements OnInit {
     video!: File;
     chooseLabel: string = 'Adicionar Vídeo';
     modoPreparo: string = '';
-    produtosData: Produto[] = [{ desc: '', unidMedida: '', medida: 0 }];
+    produtosData: Produto[] = [{ desc: '', unidMedida: 'unidade', medida: 0 }];
     formBuilder: FormBuilder = new FormBuilder();
 
     constructor(private medidaService: UnidadeMedidaService, private messageService: MessageService,
@@ -53,7 +50,7 @@ export class FormStepComponent implements OnInit {
     addProduto(): void {
         this.ingredientes.push(this.formBuilder.group({
             desc: '',
-            unidMedida: '',
+            unidMedida: 'unidade',
             medida: 0
         }));
     }

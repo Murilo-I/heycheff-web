@@ -21,8 +21,8 @@ export class ReceitaService {
     return this.httpClient.get<ReceitaFeed[]>(this.url);
   }
 
-  loadModal(id: BigInteger) {
-    return this.httpClient.get<ReceitaModal[]>(`${this.url}/${id}`);
+  loadModal(id: number) {
+    return this.httpClient.get<ReceitaModal>(`${this.url}/${id}`);
   }
 
   incluir(receita: ReceitaRequest, thumb: File) {
