@@ -1,7 +1,7 @@
 .icon-align {
     font-size: 2.5rem;
     position: absolute;
-    top: 50%;
+    top: calc(50% - 2.5rem);
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;

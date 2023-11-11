@@ -5,7 +5,7 @@
 			(click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-		<form-receita *ngIf="ehCadastro"></form-receita>
+		<form-receita *ngIf="ehCadastro" [modal]="modal"></form-receita>
 		<form-step (stepEvent)="pushStep($event)" [receitaId]="receitaId" [stepNumber]="stepNumber" [modal]="modal"
 			*ngIf="stepFull"></form-step>
 		<video-receita [receitaId]="receitaId" *ngIf="learnReceita"></video-receita>

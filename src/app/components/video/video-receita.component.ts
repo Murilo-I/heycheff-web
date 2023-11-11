@@ -12,7 +12,7 @@ export class VideoReceitaComponent implements OnInit {
 
   @Input() receitaId: number = 0;
   receita!: ReceitaModal;
-  videos: any[] = [];
+  videos: string[] = [];
   index: number = 0;
 
   constructor(private receitaService: ReceitaService) { }

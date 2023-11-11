@@ -1,0 +1,14 @@
+<div class="mt-8 flex flex-wrap justify-content-evenly">
+	<div *ngFor="let receita of feed">
+		<p-card [style]="{ width: '400px' }" class="card mb-5">
+			<ng-template pTemplate="header">
+				<div class="thumb">
+					<img class="card-img" alt="Receita Card" src="{{receita.thumb}}" />
+					<modal [title]="'Aprender Receita'" [learnReceita]="true" [receitaId]="receita.id"></modal>
+				</div>
+			</ng-template>
+			<p class="card-title">{{receita.titulo}}</p>
+		</p-card>
+	</div>
+</div>
+<router-outlet></router-outlet>

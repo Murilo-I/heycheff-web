@@ -1,8 +1,6 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
-import { ReceitaService } from './service/receita.service';
-import { ReceitaFeed } from './model/receita-feed';
-import { environment } from 'src/environments/environment';
-import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter, map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -11,18 +9,16 @@ import { NgbOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppComponent implements OnInit {
 
-  feed: ReceitaFeed[] = [];
-
-  constructor(private receitaService: ReceitaService, private offcanvasService: NgbOffcanvas) { }
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.receitaService.loadFeed().subscribe(receitas => {
-      receitas.forEach(r => r.thumb = environment.BaseUrl + r.thumb);
-      this.feed = receitas;
-    });
-  }
-
-  openMenu(content: TemplateRef<any>) {
-    this.offcanvasService.open(content, { position: 'end' });
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .pipe(map(() => this.activatedRoute))
+      .pipe(map(route => {
+        while (route.firstChild) route = route.firstChild;
+        return route;
+      }))
+      .pipe(switchMap(route => route.data));
   }
 }

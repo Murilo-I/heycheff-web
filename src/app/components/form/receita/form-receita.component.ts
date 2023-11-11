@@ -1,6 +1,9 @@
 import { HttpEvent, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { MessageService } from 'primeng/api';
+import { finalize } from 'rxjs';
 import { ReceitaRequest } from 'src/app/model/receita-request';
 import { ReceitaStatus } from 'src/app/model/receita-status';
 import { StepRequest } from 'src/app/model/step-request';
@@ -16,6 +19,8 @@ import { TagService } from 'src/app/service/tag.service';
     providers: [MessageService]
 })
 export class FormReceitaComponent implements OnInit {
+    @Input() modal!: NgbModalRef;
+
     thumb!: File;
     selectedTags: string[] = [];
     steps: StepRequest[] = [];
@@ -27,7 +32,7 @@ export class FormReceitaComponent implements OnInit {
 
     tags: Tag[] = [];
 
-    constructor(private messageService: MessageService,
+    constructor(private messageService: MessageService, private router: Router,
         private tagService: TagService, private receitaService: ReceitaService) { }
 
     ngOnInit(): void {
@@ -97,6 +102,11 @@ export class FormReceitaComponent implements OnInit {
 
     finishForm() {
         this.receitaService.atualizaStatus(new ReceitaStatus(true), this.receitaId)
+            .pipe(finalize(() => {
+                if (this.router.url.includes("home")) this.router.navigate(['feed']);
+                else this.router.navigate(['home'])
+                this.modal.close("Close Form");
+            }))
             .subscribe((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
                     this.messageService.add({ severity: 'success', summary: 'Cadastro finalizado', detail: '' });
