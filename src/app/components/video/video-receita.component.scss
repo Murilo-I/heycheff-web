@@ -10,4 +10,22 @@ p-tag {
 video {
     width: 60%;
     height: 60vh;
+    margin-right: 15px;
+}
+
+.steps, .next-previous-btn {
+    display: flex;
+    justify-content: space-between;
+}
+
+.step p {
+    text-align: justify;
+}
+
+.products {
+    margin: 25px 0;
+}
+
+li, p {
+    font-size: 17.5px;
 }

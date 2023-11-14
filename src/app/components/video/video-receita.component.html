@@ -3,10 +3,22 @@
         <p-tag value="{{tag.tag}}"></p-tag>
     </div>
 </div>
-<div class="step">
-    <video [src]="videos.at(index)" controls>
-    </video>
+<div class="steps">
+    <video [src]="currentVideo" controls></video>
+    <div class="step">
+        <p>{{steps.at(index)?.modoPreparo}}</p>
+    </div>
+</div>
+<div class="products">
+    <ul>
+        <li *ngFor="let product of currentStep?.produtos">
+            {{product.desc}} - {{product.medida}} : {{product.unidMedida}}
+        </li>
+    </ul>
 </div>
 <div class="next-previous-btn">
-
+    <p-button label="Anterior" [disabled]="this.index == 0" styleClass="p-button-danger"
+        (onClick)="changeStep(this.index - 1)"></p-button>
+    <p-button label="Próximo" [disabled]="this.index == this.steps.length -1" styleClass="p-button-danger"
+        (onClick)="changeStep(this.index + 1)"></p-button>
 </div>
