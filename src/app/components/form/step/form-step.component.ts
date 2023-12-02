@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { MessageService } from 'primeng/api';
+import { HttpEvent, HttpResponse } from "@angular/common/http";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormArray, FormBuilder, FormGroup } from "@angular/forms";
+import { NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
+import { MessageService } from 'primeng/api';
 import { Produto } from "src/app/model/produto";
 import { StepRequest } from "src/app/model/step-request";
 import { ProdutoService } from "src/app/service/produto.service";
 import { StepService } from "src/app/service/step.service";
 import { UnidadeMedidaService } from "src/app/service/unidade-medida.service";
-import { HttpEvent, HttpResponse } from "@angular/common/http";
-import { NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'form-step',
@@ -28,7 +28,7 @@ export class FormStepComponent implements OnInit {
     video!: File;
     chooseLabel: string = 'Adicionar Vídeo';
     modoPreparo: string = '';
-    produtosData: Produto[] = [{ desc: '', unidMedida: 'unidade', medida: 0 }];
+    produtosData: Produto[] = [{ desc: '', unidMedida: 'unidade', medida: 1 }];
     formBuilder: FormBuilder = new FormBuilder();
 
     constructor(private medidaService: UnidadeMedidaService, private messageService: MessageService,
@@ -51,7 +51,7 @@ export class FormStepComponent implements OnInit {
         this.ingredientes.push(this.formBuilder.group({
             desc: '',
             unidMedida: 'unidade',
-            medida: 0
+            medida: 1
         }));
     }
 

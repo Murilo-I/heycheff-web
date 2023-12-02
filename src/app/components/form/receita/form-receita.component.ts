@@ -56,10 +56,14 @@ export class FormReceitaComponent implements OnInit {
             if (event instanceof HttpResponse) {
                 this.messageService.add({ severity: 'success', summary: 'Receita salva', detail: '' });
                 this.stepEnabled = true;
-                this.receitaId = event.body.id;
+                this.receitaId = event.body.seqId;
             }
         },
-            err => this.messageService.add({ severity: 'error', summary: 'Erro ao salvar receita', detail: err.toString() }));
+            err => this.messageService.add({
+                severity: 'error', summary: 'Erro ao salvar receita',
+                detail: "Não esqueça de adicionar a thumb!"
+            })
+        );
     }
 
     addStep(step: StepRequest) {
